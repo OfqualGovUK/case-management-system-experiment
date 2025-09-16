@@ -1,0 +1,24 @@
+{
+  "name": "ofqualcarbon",
+  "private": true,
+  "scripts": {
+    "livereload": "livereload --exclusions node_modules/ --exts 'css,js,twig,theme,apng,avif,gif,jpg,jpeg,jfif,pjpeg,pjp,png,svg,webp'",
+    "build:css": "sass --load-path=node_modules ./scss/style.scss ./css/style.css --no-source-map --style=compressed",
+    "watch:css": "sass --load-path=node_modules --watch ./scss/style.scss ./css/style.css --style=expanded"
+  },
+  "devDependencies": {
+    "livereload": "^0.9.3",
+    "sass": "^1.92.1"
+  },
+  "version": "1.0.0",
+  "main": "index.js",
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "description": "",
+  "dependencies": {
+    "@carbon/icons": "^11.67.0",
+    "@carbon/styles": "^1.90.0",
+    "carbon-components": "^10.59.2"
+  }
+}

@@ -1,0 +1,8 @@
+# Schema for the configuration files of the ofqualcarbon theme.
+ofqualcarbon.settings:
+  type: theme_settings
+  label: 'ofqualcarbon settings'
+  mapping:
+    example:
+      type: string
+      label: Example

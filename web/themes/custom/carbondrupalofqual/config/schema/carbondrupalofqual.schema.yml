@@ -1,0 +1,8 @@
+# Schema for the configuration files of the carbondrupalofqual theme.
+carbondrupalofqual.settings:
+  type: theme_settings
+  label: 'carbondrupalofqual settings'
+  mapping:
+    example:
+      type: string
+      label: Example

@@ -1,0 +1,27 @@
+// First: use your custom settings (fonts, etc.)
+@use 'carbon-settings';
+ 
+// Then: configure and import Carbon styles with any settings you need
+@use '@carbon/styles' with (
+  $font-path: carbon-settings.$font-path
+);
+ 
+// Now: import only what's needed and avoid re-importing config modules
+@use '@carbon/styles/scss/reset' as *;
+@use '@carbon/styles/scss/layout' as *;
+@use '@carbon/styles/scss/components/date-picker';
+ 
+// ✅ Remove this: causes conflict
+// @use '@carbon/grid/scss/config';
+// @use '@carbon/grid/scss/css-grid' as *;
+// @use '@carbon/grid/scss/flex-grid' as *;
+ 
+// Your custom styles
+//@use '/base/variables';
+//@use '/components/button';
+//@use '/layout/layout';
+ 
+body {
+  font-family: 'IBM Plex Sans', sans-serif;
+  background-color: #f4f4f4;
+}
