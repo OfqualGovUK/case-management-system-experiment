@@ -1,0 +1,127 @@
+{#
+/**
+* @file
+* Theme override to display a single page.
+* Path: themes/custom/carbonv1/templates/layout/page.html.twig
+*
+* Requires your theme JS to import the Carbon Web Components groups, e.g.:
+*   import '@carbon/web-components/es/components/accordion/index.js';
+*   import '@carbon/web-components/es/components/date-picker/index.js';
+*   import '@carbon/web-components/es/components/data-table/index.js';
+*   import '@carbon/web-components/es/components/pagination/index.js';
+*
+* And your Sass to include @carbon/styles so tokens are available.
+*/
+#}
+ 
+<div class="page-wrapper">
+ 
+  {# Header region #}
+  {% if page.header %}
+<header class="site-header" role="banner">
+      {{ page.header }}
+</header>
+  {% endif %}
+ 
+  {# Primary nav #}
+  {% if page.primary_menu %}
+<nav class="primary-nav" role="navigation" aria-label="{{ 'Main navigation'|t }}">
+      {{ page.primary_menu }}
+</nav>
+  {% endif %}
+ 
+  {# Breadcrumb (if using core breadcrumb block/region) #}
+  {% if breadcrumb is defined and breadcrumb %}
+<nav class="breadcrumb" aria-label="{{ 'Breadcrumb'|t }}">
+      {{ breadcrumb }}
+</nav>
+  {% endif %}
+ 
+  {% if page.highlighted %}
+<div class="highlighted">{{ page.highlighted }}</div>
+  {% endif %}
+ 
+  {% if page.help %}
+<div class="help">{{ page.help }}</div>
+  {% endif %}
+ 
+  <main role="main" class="site-main">
+<a id="main-content" tabindex="-1"></a>
+ 
+    {# -----------------------------------------------
+       Carbon demo section — remove when not needed
+       ----------------------------------------------- #}
+<section class="carbon-demo" aria-labelledby="carbon-demo-heading">
+<h1 id="carbon-demo-heading">Carbon components demo</h1>
+ 
+      <h2>Accordion</h2>
+<cds-accordion>
+<cds-accordion-item title="What is Carbon?">
+<p>IBM’s design system for building accessible, consistent UIs.</p>
+</cds-accordion-item>
+<cds-accordion-item title="Why use it?" open>
+<p>Design tokens, web components, and robust patterns.</p>
+</cds-accordion-item>
+</cds-accordion>
+ 
+<!--      <h2 class="mt-6">Date picker</h2>
+<cds-date-picker date-format="Y-m-d">
+<cds-date-picker-input
+          placeholder="yyyy-mm-dd"
+          label-text="Choose a date"
+          kind="single">
+</cds-date-picker-input>
+</cds-date-picker>
+ 
+      <h2 class="mt-6">Data table</h2>
+<cds-table size="lg">
+<cds-table-head>
+<cds-table-row>
+<cds-table-header>Name</cds-table-header>
+<cds-table-header>Role</cds-table-header>
+<cds-table-header>Status</cds-table-header>
+</cds-table-row>
+</cds-table-head>
+<cds-table-body>
+<cds-table-row>
+<cds-table-cell>Ada</cds-table-cell>
+<cds-table-cell>Engineer</cds-table-cell>
+<cds-table-cell>Active</cds-table-cell>
+</cds-table-row>
+<cds-table-row>
+<cds-table-cell>Lin</cds-table-cell>
+<cds-table-cell>Designer</cds-table-cell>
+<cds-table-cell>Inactive</cds-table-cell>
+</cds-table-row>
+</cds-table-body>
+</cds-table>
+-->
+</section>
+    {# --------------------------------------------- #}
+ 
+    {# Main content region #}
+    {% if page.content %}
+<div class="page-content">
+        {{ page.content }}
+</div>
+    {% endif %}
+ 
+    {% if page.sidebar_first %}
+<aside class="layout-sidebar-first" role="complementary">
+        {{ page.sidebar_first }}
+</aside>
+    {% endif %}
+ 
+    {% if page.sidebar_second %}
+<aside class="layout-sidebar-second" role="complementary">
+        {{ page.sidebar_second }}
+</aside>
+    {% endif %}
+</main>
+ 
+  {% if page.footer %}
+<footer class="site-footer" role="contentinfo">
+      {{ page.footer }}
+</footer>
+  {% endif %}
+</div>
