@@ -1,0 +1,58 @@
+{# Generate a unique table ID if not provided #}
+{% set _id = id|default('cds-table-' ~ random()) %}
+
+<section class="cds-data-table" data-cds-datatable
+    data-coltypes='{{ (column_types|default([]))|json_encode|raw }}'
+    data-paginated='{{ paginated ? "1" : "0" }}'
+    data-page-size='{{ page_size|default(10) }}'>
+
+    {# Optional search toolbar #}
+    {% if searchable %}
+        <cds-table-toolbar>
+            <cds-table-toolbar-content>
+                <cds-table-toolbar-search
+                    placeholder="{{ search_placeholder|default('Search…') }}"
+                    data-filter="{{ _id }}">
+                </cds-table-toolbar-search>
+            </cds-table-toolbar-content>
+        </cds-table-toolbar>
+    {% endif %}
+
+    <cds-table id="{{ _id }}" size="{{ size|default('lg') }}">
+        <cds-table-head>
+            <cds-table-header-row>
+                {% for h in headers %}
+                    {% set idx = loop.index0 %}
+                    <cds-table-header-cell
+                        {% if sortable %} data-sortable data-col="{{ idx }}" aria-sort="none"{% endif %}>
+                        {{ h }}
+                    </cds-table-header-cell>
+                {% endfor %}
+             </cds-table-header-row>
+        </cds-table-head>
+        <cds-table-body>
+            {% for row in rows %}
+                <cds-table-row>
+                    {% for cell in row.cells %}
+                        <cds-table-cell>{{ cell }}</cds-table-cell>
+                    {% endfor %}
+                </cds-table-row>
+            {% endfor %}
+        </cds-table-body>
+    </cds-table>
+
+    {# Optional pagination #}
+    {% if paginated %}
+        <div class="pager">
+            <cds-pagination class="cds-pager"
+                page="1"
+                page-size="{{ page_size|default(10) }}"
+                page-sizes='[{{ (page_sizes|default([10,20,50])|join(",")) }}]'
+                total-items="{{ rows|length }}">
+            </cds-pagination>
+        </div>
+    {% endif %}
+
+    <div class="cds-table-empty" hidden>No results</div>
+</section>
+

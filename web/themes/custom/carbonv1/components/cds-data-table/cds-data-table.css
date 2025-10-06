@@ -1,0 +1,141 @@
+/* Main data table container */
+.cds-data-table {
+    width: 80%;
+    margin: 10px 0px;
+}
+
+/* Sortable column styles */
+.cds-data-table [data-sortable] {
+    position: relative;
+    padding-right: 2rem;
+    cursor: pointer;
+    user-select: none;
+}
+
+/* Sort icon positioning and visibility */
+.cds-data-table [data-sortable] .cds-sort-icon {
+    position: absolute;
+    right: .5rem;
+    top: 50%;
+    transform: translateY(-50%);
+   /* width: 32px;
+    height: 16px;*/
+    display: inline-flex;
+    pointer-events: none;
+    opacity: 0;
+    transition: opacity .12s ease-in-out;
+}
+
+/* Show sort icon on hover/focus when not sorted */
+.cds-data-table [data-sortable][aria-sort="none"]:hover .cds-sort-icon,
+.cds-data-table [data-sortable][aria-sort="none"]:focus-visible .cds-sort-icon {
+    opacity: .65;
+}
+
+/* Show sort icon when sorted */
+.cds-data-table [data-sortable][aria-sort="ascending"] .cds-sort-icon,
+.cds-data-table [data-sortable][aria-sort="descending"] .cds-sort-icon {
+    opacity: 1;
+}
+
+/* Table layout and structure */
+cds-table::part(table) {
+    table-layout: fixed;
+    inline-size: 100%;
+    border-collapse: separate;
+    border-spacing: 0;
+}
+
+/* Table cell text overflow handling */
+cds-table-head-cell::part(cell),
+cds-table-cell::part(cell) {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    min-inline-size: 0;
+}
+
+/* Table display block and sizing */
+cds-table {
+    display: block;
+    inline-size: 100%;
+}
+
+/* Table cell text overflow handling (redundant for custom elements) */
+cds-table-head-cell,
+cds-table-cell {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    min-inline-size: 0;
+}
+
+/* Remove transitions from table elements */
+cds-table,
+cds-table-head,
+cds-table-body,
+cds-table-row,
+cds-table-head-cell,
+cds-table-cell {
+    transition: none !important;
+}
+
+/* Column widths for each table column */
+/* CaseID */
+cds-table-header-row > cds-table-header-cell:nth-child(1),
+cds-table-body cds-table-row > cds-table-cell:nth-child(1) {
+    inline-size: 8ch;
+}
+
+/* Title */
+cds-table-header-row > cds-table-header-cell:nth-child(2),
+cds-table-body cds-table-row > cds-table-cell:nth-child(2) {
+    inline-size: 34ch;
+}
+
+/* Case type */
+cds-table-header-row > cds-table-header-cell:nth-child(3),
+cds-table-body cds-table-row > cds-table-cell:nth-child(3) {
+    inline-size: 30ch;
+}
+
+/* Submitted by */
+cds-table-header-row > cds-table-header-cell:nth-child(4),
+cds-table-body cds-table-row > cds-table-cell:nth-child(4) {
+    inline-size: 30ch;
+}
+
+/* Received date */
+cds-table-header-row > cds-table-header-cell:nth-child(5),
+cds-table-body cds-table-row > cds-table-cell:nth-child(5) {
+    inline-size: 9ch;
+}
+
+/* Status */
+cds-table-header-row > cds-table-header-cell:nth-child(6),
+cds-table-body cds-table-row > cds-table-cell:nth-child(6) {
+    inline-size: 14ch;
+}
+
+/* Case lead */
+cds-table-header-row > cds-table-header-cell:nth-child(7),
+cds-table-body cds-table-row > cds-table-cell:nth-child(7) {
+    inline-size: 20ch;
+}
+/* smooth hover */
+cds-table-header-cell {
+  transition: background-color .12s ease;
+  cursor: pointer;
+}
+ 
+/* hover only */
+cds-table-header-cell:hover, cds-table-header-cell[aria-sort="ascending"], cds-table-header-cell[aria-sort="descending"]  {
+  /* Carbon token adapts to light/dark; fallback to a light grey */
+  background-color: var(--cds-layer-hover, #f2f4f8) !important;
+}
+ 
+/* ensure no persistent bg when sorted (only on hover) 
+cds-table-header-cell[aria-sort]:not(:hover) {
+  background-color: transparent;
+}
+*/
