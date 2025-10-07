@@ -127,15 +127,3 @@ cds-table-header-cell {
   transition: background-color .12s ease;
   cursor: pointer;
 }
- 
-/* hover only */
-cds-table-header-cell:hover, cds-table-header-cell[aria-sort="ascending"], cds-table-header-cell[aria-sort="descending"]  {
-  /* Carbon token adapts to light/dark; fallback to a light grey */
-  background-color: var(--cds-layer-hover, #f2f4f8) !important;
-}
- 
-/* ensure no persistent bg when sorted (only on hover) 
-cds-table-header-cell[aria-sort]:not(:hover) {
-  background-color: transparent;
-}
-*/

@@ -6,7 +6,10 @@
     data-paginated='{{ paginated ? "1" : "0" }}'
     data-page-size='{{ page_size|default(10) }}'>
 
-    {# Optional search toolbar #}
+
+
+    <cds-table {% if sortable %} is-sortable="" {% endif %} id="{{ _id }}" size="{{ size|default('lg') }}">
+        {# Optional search toolbar #}
     {% if searchable %}
         <cds-table-toolbar>
             <cds-table-toolbar-content>
@@ -17,14 +20,12 @@
             </cds-table-toolbar-content>
         </cds-table-toolbar>
     {% endif %}
-
-    <cds-table id="{{ _id }}" size="{{ size|default('lg') }}">
         <cds-table-head>
             <cds-table-header-row>
                 {% for h in headers %}
                     {% set idx = loop.index0 %}
-                    <cds-table-header-cell
-                        {% if sortable %} data-sortable data-col="{{ idx }}" aria-sort="none"{% endif %}>
+                    <cds-table-header-cell 
+                        {% if sortable %} data-sortable  data-col="{{ idx }}" aria-sort="none"{% endif %}>
                         {{ h }}
                     </cds-table-header-cell>
                 {% endfor %}
@@ -39,8 +40,7 @@
                 </cds-table-row>
             {% endfor %}
         </cds-table-body>
-    </cds-table>
-
+        
     {# Optional pagination #}
     {% if paginated %}
         <div class="pager">
@@ -52,6 +52,8 @@
             </cds-pagination>
         </div>
     {% endif %}
+    </cds-table>
+
 
     <div class="cds-table-empty" hidden>No results</div>
 </section>
