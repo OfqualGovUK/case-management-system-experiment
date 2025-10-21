@@ -49,17 +49,15 @@
 
     <!-- Container: full-width Carbon CSS Grid -->
     <div class="cds--css-grid cds--css-grid--full-width">
-
       <!-- LEFT column -->
-      <div
-        class="
-          cds--css-grid-column
-          cds--sm:col-span-4   <!-- sm: 4-column grid -> full width (stacked) -->
-          cds--md:col-span-2   <!-- md: 8-column grid -> 2/8 -->
-          cds--lg:col-span-4   <!-- lg: 16-column grid -> 4/16 -->
-          cds--xlg:col-span-4  <!-- xlg: 16-column grid -> 4/16 -->
-          cds--max:col-span-4  <!-- max: 16-column grid -> 4/16 -->
-        ">
+      <div class="
+        cds--css-grid-column
+        cds--sm:col-span-4
+        cds--md:col-span-2
+        cds--lg:col-span-4
+        cds--xlg:col-span-4
+        cds--max:col-span-4
+      ">
         <!-- Left rail content (e.g., filters, queues) -->
         {% if page.sidebar_first %}
           {{ page.sidebar_first }}
@@ -83,26 +81,27 @@
             <p>Design tokens, web components, and robust patterns.</p>
           </cds-accordion-item>
         </cds-accordion>
-        <h4> Text Input </h4>
-{# Text input #}
-{% include 'carbonv1:cds-text-input' with {
-  name: 'case_title',
-  label: 'Title',
-  placeholder: 'Enter title…',
-  required: true,
-  type: 'text',
-  helper_text: 'Please enter the case title.',
-} only %}
-{# Text input #}
-{% include 'carbonv1:cds-text-input' with {
-  name: 'case_password',
-  label: 'Password',
-  placeholder: 'Enter Password',
-  required: true,
-  type: 'password',
-  helper_text: 'Please enter the case Password.',
-} only %}
+
+        <h4>Text Input</h4>
+        {# Text input #}
+        {% include 'carbonv1:cds-text-input' with {
+          name: 'case_title',
+          label: 'Title',
+          placeholder: 'Enter title…',
+          required: true,
+          type: 'text',
+          helper_text: 'Please enter the case title.',
+        } only %}
+        {% include 'carbonv1:cds-text-input' with {
+          name: 'case_password',
+          label: 'Password',
+          placeholder: 'Enter Password',
+          required: true,
+          type: 'password',
+          helper_text: 'Please enter the case Password.',
+        } only %}
         <cds-form-item>
+        <h4>Select</h4>
           <cds-select
             helper-text="Optional helper text"
             invalid-text="Error message"
@@ -152,23 +151,32 @@
             rows="4"
             cols="0"
           ></cds-textarea>
-
-          <cds-button>
-            Button
-          </cds-button>
         </cds-form-item>
+                <h4>Button</h4>
+        {# Primary submit button #}
+        {% include 'carbonv1:cds-button' with {
+          text: 'Save',
+          kind: 'primary',
+          type: 'submit'
+        } only %}
+        
+        {# Ghost link button #}
+        {% include 'carbonv1:cds-button' with {
+          text: 'Cancel',
+          kind: 'primary',
+          href: path('<front>')
+        } only %}
       </div>
 
       <!-- RIGHT column -->
-      <div
-        class="
-          cds--css-grid-column
-          cds--sm:col-span-4   <!-- sm: 4/4 -> full width (stacked below left) -->
-          cds--md:col-span-6   <!-- md: 6/8 -->
-          cds--lg:col-span-12  <!-- lg: 12/16 -->
-          cds--xlg:col-span-12 <!-- xlg: 12/16 -->
-          cds--max:col-span-12 <!-- max: 12/16 -->
-        ">
+      <div class="
+        cds--css-grid-column
+        cds--sm:col-span-4
+        cds--md:col-span-6
+        cds--lg:col-span-12
+        cds--xlg:col-span-12
+        cds--max:col-span-12
+      ">
         <!-- Main content -->
         {% if page.contents %}
           <div class="page-content">
@@ -202,8 +210,8 @@
           column_types: ['string','string','string','string','date','string','string']
         } only %}
       </div>
-
     </div>
+
     {% include '@carbonv1/includes/footer.html.twig' %}
 
     {# Sidebars #}
