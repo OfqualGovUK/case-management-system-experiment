@@ -24,4 +24,12 @@ import '@carbon/web-components/es/components/pagination/index.js';
 //import '@carbon/web-components/es/components/data-table/data-table-sort.js';
 // tags (for filter chips, if needed)
 import '@carbon/web-components/es/components/tag/index.js';
+import '@carbon/web-components/es/components/ui-shell/index.js';
+import '@carbon/web-components/es/components/button/index.js';
+import '@carbon/web-components/es/components/link/index.js';
+import '@carbon/web-components/es/components/layer/index.js';
+import '@carbon/web-components/es/components/text-input/index.js';
+import '@carbon/web-components/es/components/select/index.js';
+// UI Shell components
 
+// Button and Link components

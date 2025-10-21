@@ -1,36 +1,23 @@
-{# Generate a unique table ID if not provided #}
 {% set _id = id|default('cds-table-' ~ random()) %}
 
-<section class="cds-data-table" data-cds-datatable
-    data-coltypes='{{ (column_types|default([]))|json_encode|raw }}'
-    data-paginated='{{ paginated ? "1" : "0" }}'
-    data-page-size='{{ page_size|default(10) }}'>
+<section class="cds-data-table" data-cds-datatable data-page-size="{{ page_size|default(10) }}">
+    <cds-table {% if sortable %}is-sortable{% endif %} id="{{ _id }}" size="{{ size|default('lg') }}">
+        {% if searchable %}
+            <cds-table-toolbar slot="toolbar">
+                <cds-table-toolbar-content>
+                    <cds-table-toolbar-search placeholder="{{ search_placeholder|default('Search…') }}"></cds-table-toolbar-search>
+                </cds-table-toolbar-content>
+            </cds-table-toolbar>
+        {% endif %}
 
-
-
-    <cds-table {% if sortable %} is-sortable="" {% endif %} id="{{ _id }}" size="{{ size|default('lg') }}">
-        {# Optional search toolbar #}
-    {% if searchable %}
-        <cds-table-toolbar>
-            <cds-table-toolbar-content>
-                <cds-table-toolbar-search
-                    placeholder="{{ search_placeholder|default('Search…') }}"
-                    data-filter="{{ _id }}">
-                </cds-table-toolbar-search>
-            </cds-table-toolbar-content>
-        </cds-table-toolbar>
-    {% endif %}
         <cds-table-head>
             <cds-table-header-row>
                 {% for h in headers %}
-                    {% set idx = loop.index0 %}
-                    <cds-table-header-cell 
-                        {% if sortable %} data-sortable  data-col="{{ idx }}" aria-sort="none"{% endif %}>
-                        {{ h }}
-                    </cds-table-header-cell>
+                    <cds-table-header-cell>{{ h }}</cds-table-header-cell>
                 {% endfor %}
-             </cds-table-header-row>
+            </cds-table-header-row>
         </cds-table-head>
+
         <cds-table-body>
             {% for row in rows %}
                 <cds-table-row>
@@ -40,21 +27,16 @@
                 </cds-table-row>
             {% endfor %}
         </cds-table-body>
-        
-    {# Optional pagination #}
-    {% if paginated %}
-        <div class="pager">
-            <cds-pagination class="cds-pager"
-                page="1"
-                page-size="{{ page_size|default(10) }}"
-                page-sizes='[{{ (page_sizes|default([10,20,50])|join(",")) }}]'
-                total-items="{{ rows|length }}">
-            </cds-pagination>
-        </div>
-    {% endif %}
     </cds-table>
 
+    {% if paginated %}
+        <cds-pagination class="cds-pager"
+            page="1"
+            page-size="{{ page_size|default(10) }}"
+            page-sizes='[{{ (page_sizes|default([10,20,50])|join(",")) }}]'
+            total-items="{{ rows|length }}">
+        </cds-pagination>
+    {% endif %}
 
     <div class="cds-table-empty" hidden>No results</div>
 </section>
-

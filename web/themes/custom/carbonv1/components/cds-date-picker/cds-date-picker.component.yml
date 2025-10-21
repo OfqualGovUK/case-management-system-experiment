@@ -8,7 +8,7 @@ libraryOverrides:
    - carbonv1/global
 
 props:
-  tyle: object
+  type: object
   properties:
     label_text:
       type: string
@@ -25,5 +25,5 @@ props:
       default: 'Y-m-d'
     value:
       type: string
-      nullable: true
+      nullable: false
   required: [label_text]

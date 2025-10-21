@@ -1,0 +1,48 @@
+<!--<cds-header aria-label="{{ site_name | default('Site') }}" class="cds--header">
+    <cds-header-menu-button button-label="Open menu"></cds-header-menu-button>
+    <cds-header-name href="{{ path('<front>') }}" prefix="{{ site_name | default('Carbon') }}">
+        Case Management
+    </cds-header-name>
+    <cds-header-nav menu-bar-label="Main navigation">
+        <cds-header-menu-item href="{{ path('<front>') }}">Home</cds-header-menu-item>
+        <cds-header-menu-item href="/cases">Cases</cds-header-menu-item>
+        <cds-header-menu-item href="/reports">Reports</cds-header-menu-item>
+    </cds-header-nav>
+</cds-header> -->
+
+<cds-header aria-label="{{site_name | default('site')}}" class="cds--header">
+  <cds-header-menu-button button-label-active="Close menu" button-label-inactive="Open menu"></cds-header-menu-button>
+  <cds-header-name href="javascript:void 0" prefix="Ofqual">Cases</cds-header-name>
+  <cds-header-nav menu-bar-label="Ofqual Cases" style="color: green;">
+    <cds-header-nav-item href="{{ path('<front>') }}">Cases</cds-header-nav-item>
+    <cds-header-menu menu-label="Profiles" trigger-content="Profiles">
+      <cds-header-menu-item href="javascript:void 0">Regulated organisations</cds-header-menu-item>
+      <cds-header-menu-item href="javascript:void 0">Subject matter specialists</cds-header-menu-item>
+      <cds-header-menu-item href="javascript:void 0">Prospective organisations</cds-header-menu-item>
+    </cds-header-menu>
+  </cds-header-nav>
+  <cds-side-nav is-not-persistent="" aria-label="Side navigation" collapse-mode="responsive">
+    <cds-side-nav-items>
+      <cds-side-nav-link href="javascript:void(0)">
+        Link 1
+      </cds-side-nav-link>
+      <cds-side-nav-link href="javascript:void(0)">
+        Link 2
+      </cds-side-nav-link>
+      <cds-side-nav-link href="javascript:void(0)">
+        Link 3
+      </cds-side-nav-link>
+      <cds-side-nav-menu title="Link 4">
+        <cds-side-nav-menu-item href="https://www.carbondesignsystem.com/">
+          Sub-link 1
+        </cds-side-nav-menu-item>
+        <cds-side-nav-menu-item href="https://www.carbondesignsystem.com/">
+          Sub-link 2
+        </cds-side-nav-menu-item>
+        <cds-side-nav-menu-item href="https://www.carbondesignsystem.com/">
+          Sub-link 3
+        </cds-side-nav-menu-item>
+      </cds-side-nav-menu>
+    </cds-side-nav-items>
+  </cds-side-nav>
+</cds-header>
