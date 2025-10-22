@@ -112,7 +112,15 @@
             { value: 'review',  label: 'Review' },
             { value: 'closed',  label: 'Closed' }
           ]
-        } only %}        
+        } only %}   
+        <h4>Textarea</h4>
+        {# Textarea #}
+        {% include 'carbonv1:cds-textarea' with {
+          name: 'case_notes',
+          label: 'Notes',
+          rows: 6,
+          helper_text: 'Provide a detailed description of the case.'
+        } only %}    
         <h4>Button</h4>
         {# danger link button #}
         {% include 'carbonv1:cds-button' with {
