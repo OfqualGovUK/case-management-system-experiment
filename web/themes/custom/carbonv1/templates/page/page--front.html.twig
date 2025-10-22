@@ -100,72 +100,32 @@
           type: 'password',
           helper_text: 'Please enter the case Password.',
         } only %}
-        <cds-form-item>
         <h4>Select</h4>
-          <cds-select
-            helper-text="Optional helper text"
-            invalid-text="Error message"
-            label-text="Select an option"
-            placeholder=""
-            size="md"
-            warn-text="Warning message"
-            value=""
-          >
-            <cds-select-item value=""></cds-select-item>
-            <cds-select-item value="all">
-              An example option that is really long to show what should be done to handle long text
-            </cds-select-item>
-            <cds-select-item value="cloudFoundry">Option 2</cds-select-item>
-            <cds-select-item value="staging">Option 3</cds-select-item>
-            <cds-select-item value="dea">Option 4</cds-select-item>
-            <cds-select-item value="An example option that is really long to show what should be done to handle long text">
-              An example option that is really long to show what should be done to handle long text
-            </cds-select-item>
-            <cds-select-item selected="" value="option-2">Option 2</cds-select-item>
-            <cds-select-item value="option-3">Option 3</cds-select-item>
-            <cds-select-item value="option-4">Option 4</cds-select-item>
-          </cds-select>
-
-          <cds-text-input
-            helper-text="Helper text"
-            invalid-text="Error message goes here"
-            label="Label text"
-            max-count="100"
-            placeholder="Placeholder text"
-            size="md"
-            type="text"
-            value=""
-            warn-text="Warning message that is really long can wrap to more lines but should not be excessively long."
-          ></cds-text-input>
-
-          <cds-textarea
-            enable-counter=""
-            counter-mode=""
-            helper-text="TextArea helper text"
-            invalid-text="Error message that is really long can wrap to more lines but should not be excessively long."
-            label="TextArea label"
-            value=""
-            warn-text="This is a warning message."
-            max-count="500"
-            placeholder=""
-            rows="4"
-            cols="0"
-          ></cds-textarea>
-        </cds-form-item>
-                <h4>Button</h4>
+        {# Select #}
+        {% include 'carbonv1:cds-select' with {
+          name: 'case_status',
+          label: 'Status',
+          placeholder: 'Choose status',
+          value: 'triage',
+          options: [
+            { value: 'triage',  label: 'Triage' },
+            { value: 'review',  label: 'Review' },
+            { value: 'closed',  label: 'Closed' }
+          ]
+        } only %}        
+        <h4>Button</h4>
+        {# danger link button #}
+        {% include 'carbonv1:cds-button' with {
+          text: 'Cancel',
+          kind: 'danger-tertiary',
+          href: path('<front>')
+        } only %}         
         {# Primary submit button #}
         {% include 'carbonv1:cds-button' with {
           text: 'Save',
           kind: 'primary',
           type: 'submit'
-        } only %}
-        
-        {# Ghost link button #}
-        {% include 'carbonv1:cds-button' with {
-          text: 'Cancel',
-          kind: 'primary',
-          href: path('<front>')
-        } only %}
+        } only %}           
       </div>
 
       <!-- RIGHT column -->
