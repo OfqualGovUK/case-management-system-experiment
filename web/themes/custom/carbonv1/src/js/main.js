@@ -31,6 +31,7 @@ import '@carbon/web-components/es/components/layer/index.js';
 import '@carbon/web-components/es/components/text-input/index.js';
 import '@carbon/web-components/es/components/select/index.js';
 import '@carbon/web-components/es/components/textarea/index.js';
+import '@carbon/web-components/es/components/structured-list/index.js';
 // UI Shell components
 
 // Button and Link components

@@ -177,6 +177,21 @@
           page_sizes: [10,20,50],
           column_types: ['string','string','string','string','date','string','string']
         } only %}
+        <h4>Structured List</h4>
+        {% include 'carbonv1:cds-structured-list' with {
+          caption: 'Case Summary',
+          headers: ['Case ID', 'Title', 'Status', 'Case Lead'],
+          rows: [
+            { cells: ['OFQ-1004','About invigilation','Triage','Hannah Reed'] },
+            { cells: ['OFQ-1005','Statement of Compliance','Review','Sam Turner'] },
+            { cells: ['OFQ-1006','Information notice under B4','Received','Ashley Patel'] },
+            { cells: ['OFQ-1011','Information notice B4','Closed','Rosa Jenkins'] },
+            { cells: ['OFQ-1012','Appeal against results','Open','Jordan Smith'] },
+          ],
+          condensed: true,
+          selectable: true
+        } only %}
+
       </div>
     </div>
 

@@ -1,0 +1,26 @@
+{# themes/custom/carbonv1/components/cds-structured-list/cds-structured-list.twig #}
+{% set _id = id|default('sl-' ~ random()) %}
+ 
+<cds-structured-list id="{{ _id }}" {% if condensed %}condensed{% endif %} {% if selectable %}selectable{% endif %}>
+  {% if caption %}
+<span slot="caption">{{ caption }}</span>
+  {% endif %}
+ 
+  <cds-structured-list-head>
+<cds-structured-list-header-row>
+      {% for h in headers %}
+<cds-structured-list-header-cell>{{ h }}</cds-structured-list-header-cell>
+      {% endfor %}
+</cds-structured-list-header-row>
+</cds-structured-list-head>
+ 
+  <cds-structured-list-body>
+    {% for row in rows %}
+<cds-structured-list-row {% if selectable %}value="{{ row.value }}"{% endif %}>
+        {% for cell in row.cells %}
+<cds-structured-list-cell>{{ cell }}</cds-structured-list-cell>
+        {% endfor %}
+</cds-structured-list-row>
+    {% endfor %}
+</cds-structured-list-body>
+</cds-structured-list>
