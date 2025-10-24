@@ -6,6 +6,7 @@ package: custom
 core_version_requirement: ^10 || ^11
 libraries:
   - carbonv1/global
+  - templates/includes
 regions:
   header: 'Header'
   primary_menu: 'Primary menu'
