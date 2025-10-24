@@ -15,13 +15,6 @@
 #}
 
 <div class="page-wrapper">
-  {# Header region #}
-  {% if page.header %}
-    <!--<header class="site-header" role="banner">
-      {{ page.header }}
-    </header>-->
-  {% endif %}
-  
   {# Primary nav #}
   {% if page.primary_menu %}
     <nav class="primary-nav" role="navigation" aria-label="{{ 'Main navigation'|t }}">
@@ -85,7 +78,6 @@
         page_sizes: [10,20,50],
         column_types: ['string','string','string','string','date','string','string']
       } only %}
-      {##}
       <h4>Accordion</h4>
       <cds-accordion>
         <cds-accordion-item title="What is Carbon?">

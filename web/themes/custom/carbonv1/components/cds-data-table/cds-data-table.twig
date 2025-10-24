@@ -1,7 +1,5 @@
-{% set _id = id|default('cds-table-' ~ random()) %}
-
 <section class="cds-data-table" data-cds-datatable data-page-size="{{ page_size|default(10) }}">
-    <cds-table {% if sortable %}is-sortable{% endif %} id="{{ _id }}" size="{{ size|default('lg') }}">
+    <cds-table {% if sortable %} is-sortable {% endif %} id="{{ _id }}" size="{{ size|default('lg') }}">
         {% if searchable %}
             <cds-table-toolbar slot="toolbar">
                 <cds-table-toolbar-content>
@@ -12,8 +10,8 @@
 
         <cds-table-head>
             <cds-table-header-row>
-                {% for h in headers %}
-                    <cds-table-header-cell>{{ h }}</cds-table-header-cell>
+                {% for header in headers %}
+                    <cds-table-header-cell>{{ header }}</cds-table-header-cell>
                 {% endfor %}
             </cds-table-header-row>
         </cds-table-head>
@@ -28,7 +26,6 @@
             {% endfor %}
         </cds-table-body>
     </cds-table>
-
     {% if paginated %}
         <cds-pagination class="cds-pager"
             page="1"

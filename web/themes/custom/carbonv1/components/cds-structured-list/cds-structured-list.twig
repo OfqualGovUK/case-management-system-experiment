@@ -1,26 +1,24 @@
 {# themes/custom/carbonv1/components/cds-structured-list/cds-structured-list.twig #}
-{% set _id = id|default('sl-' ~ random()) %}
- 
-<cds-structured-list id="{{ _id }}" {% if condensed %}condensed{% endif %} {% if selectable %}selectable{% endif %}>
-  {% if caption %}
-<span slot="caption">{{ caption }}</span>
-  {% endif %}
- 
-  <cds-structured-list-head>
-<cds-structured-list-header-row>
-      {% for h in headers %}
-<cds-structured-list-header-cell>{{ h }}</cds-structured-list-header-cell>
-      {% endfor %}
-</cds-structured-list-header-row>
-</cds-structured-list-head>
- 
-  <cds-structured-list-body>
-    {% for row in rows %}
-<cds-structured-list-row {% if selectable %}value="{{ row.value }}"{% endif %}>
-        {% for cell in row.cells %}
-<cds-structured-list-cell>{{ cell }}</cds-structured-list-cell>
+<cds-structured-list id="{{ _id|escape }}"{{ condensed ? ' condensed' : '' }}{{ selectable ? ' selectable' : '' }}>
+    {% if caption %}
+        <span slot="caption">{{ caption|escape }}</span>
+    {% endif %}
+
+    <cds-structured-list-head>
+        <cds-structured-list-header-row>
+            {% for header in headers %}
+                <cds-structured-list-header-cell>{{ header|escape }}</cds-structured-list-header-cell>
+            {% endfor %}
+        </cds-structured-list-header-row>
+    </cds-structured-list-head>
+
+    <cds-structured-list-body>
+        {% for row_item in rows %}
+            <cds-structured-list-row{{ selectable and row_item.value is not empty ? ' value="' ~ row_item.value|escape ~ '"' : '' }}>
+                {% for cell_value in row_item.cells %}
+                    <cds-structured-list-cell>{{ cell_value|escape }}</cds-structured-list-cell>
+                {% endfor %}
+            </cds-structured-list-row>
         {% endfor %}
-</cds-structured-list-row>
-    {% endfor %}
-</cds-structured-list-body>
+    </cds-structured-list-body>
 </cds-structured-list>
