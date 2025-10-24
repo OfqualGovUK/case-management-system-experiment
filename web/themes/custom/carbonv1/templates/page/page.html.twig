@@ -15,13 +15,6 @@
 #}
 
 <div class="page-wrapper">
-  {# Header region #}
-  {% if page.header %}
-    <header class="site-header" role="banner">
-      {{ page.header }}
-    </header>
-  {% endif %}
-
   {# Primary nav #}
   {% if page.primary_menu %}
     <nav class="primary-nav" role="navigation" aria-label="{{ 'Main navigation'|t }}">
@@ -43,10 +36,9 @@
   {% if page.help %}
     <div class="help">{{ page.help }}</div>
   {% endif %}
-
-  <main role="main" class="site-main">
+{% include '@carbonv1/includes/header.html.twig' %}
+  <main role="main" class="site-main cds--content">
     <a id="main-content" tabindex="-1"></a>
-
     <section class="carbon-demo" aria-labelledby="carbon-demo-heading">
       <div>
         <h1 id="carbon-demo-heading">Carbon components</h1>
@@ -86,7 +78,6 @@
         page_sizes: [10,20,50],
         column_types: ['string','string','string','string','date','string','string']
       } only %}
-      {##}
       <h4>Accordion</h4>
       <cds-accordion>
         <cds-accordion-item title="What is Carbon?">
@@ -97,14 +88,15 @@
         </cds-accordion-item>
       </cds-accordion>
     </section>
-
     {# Main content region #}
     {% if page.content %}
       <div class="page-content">
         {{ page.content }}
       </div>
     {% endif %}
+{% include '@carbonv1/includes/footer.html.twig' %}
 
+    {# Sidebars #}
     {% if page.sidebar_first %}
       <aside class="layout-sidebar-first" role="complementary">
         {{ page.sidebar_first }}

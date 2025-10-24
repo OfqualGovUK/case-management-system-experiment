@@ -2,53 +2,25 @@
 @use '@carbon/styles/scss/themes' as *;
 @use '@carbon/styles/scss/theme';
 @use '@carbon/styles';
-:root {  @include theme.theme($g100);   }
-html, body {
-  margin: 20px;
-  padding: 0;
-  background: var(--cds-background);
-  color: var(--cds-text-primary);
-}
-@font-face {
-  font-family: "IBM Plex Sans";
-  font-weight: 300;
-  src: url("/themes/custom/carbonv1/assets/fonts/IBMPlexSans-Light-Latin1.woff2") format("woff2");
-}
-/* Case Layout CSS */
-.cases-layout {
-  display: grid;
-  grid-template-columns: 320px 1fr;
-  gap: 1.5rem;
-}
-.cases-layout__sidebar { position: sticky; top: 1rem; align-self: start; }
-.cases-card {
-  background: var(--cds-layer);
-  border: 1px solid var(--cds-border-subtle);
-  border-radius: .5rem; padding: 1rem;
-}
-@media (max-width: 1056px) { .cases-layout { grid-template-columns: 1fr; } }
+@use '@carbon/styles/scss/colors' as colors;
+:root {  @include theme.theme($white);   }
 
-.layout--carbon-two-col {
-  display: grid;
-  grid-template-columns: 320px 1fr;
-  gap: 1.5rem;
-}
-.layout--carbon-two-col__sidebar { position: sticky; top: 1rem; align-self: start; }
+/* Only affect the menu area */
+/* Make only the menu links/chevrons IBM blue */
+cds-header-nav,
+cds-header-menu,
+cds-header-nav-item,
+cds-header-menu-item {
+  /* covers builds that use currentColor on the inner <a> */
+  color: #{colors.$blue-60};
  
-.layout-card {
-  background: var(--cds-layer);
-  border: 1px solid var(--cds-border-subtle);
-  border-radius: .5rem;
-  padding: 1rem;
+  /* covers builds that read tokens from the host */
+  --cds-text-primary: #{colors.$blue-60};
+  --cds-link-primary: #{colors.$blue-60};
+  --cds-link-primary-hover: #{colors.$blue-70};
+  --cds-icon-primary: #{colors.$blue-60};
 }
  
-.mt-16 { margin-top: 1rem; }
-.toolbar { margin-bottom: .75rem; }
-.pager { margin-top: .75rem; }
- 
-@media (max-width: 1056px) {
-  .layout--carbon-two-col { grid-template-columns: 1fr; }
-  .layout--carbon-two-col__sidebar { position: static; }
-}
-.cds-data-table [data-sortable]{ cursor: pointer; }
-.cds-data-table .cds-sort-icon svg { display:block;}
+/* Optional: highlight active item via component API (no CSS) */
+//cds-header-nav-item[active] { /* attribute is handled by the WC */ }
+
