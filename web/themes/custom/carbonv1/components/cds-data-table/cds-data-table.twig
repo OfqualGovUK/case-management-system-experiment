@@ -7,7 +7,6 @@
                 </cds-table-toolbar-content>
             </cds-table-toolbar>
         {% endif %}
-
         <cds-table-head>
             <cds-table-header-row>
                 {% for header in headers %}
@@ -15,7 +14,6 @@
                 {% endfor %}
             </cds-table-header-row>
         </cds-table-head>
-
         <cds-table-body>
             {% for row in rows %}
                 <cds-table-row>
@@ -34,6 +32,5 @@
             total-items="{{ rows|length }}">
         </cds-pagination>
     {% endif %}
-
     <div class="cds-table-empty" hidden>No results</div>
 </section>
