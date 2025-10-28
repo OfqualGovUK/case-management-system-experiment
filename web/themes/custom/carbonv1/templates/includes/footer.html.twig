@@ -1,38 +1,48 @@
 <cds-layer style="padding:2rem 0 0;margin-top:auto;">
-    <footer class="app-footer">
-        <hr class="cds--hr" style="margin:0;border:0;border-top:1px solid var(--cds-border-subtle,#393939)" />
-        <div class="cds--grid">
-            <div class="cds--row">
-                <div class="cds--col-sm-4 cds--col-md-8 cds--col-lg-16">
-                    <div>
-                        <cds-link href="https://gov.uk/ofqual">
-                            <img
-                                src="{{ base_path }}themes/custom/carbonv1/assets/images/OfqualLogocolour.svg"
-                                alt="Ofqual website"
-                                id="footer-logo"
-                                style="width:120px;height:auto;margin-top:1.5rem;min-width:80px;max-width:100%;"
-                            />
-                        </cds-link>
-                    </div>
+  <footer class="app-footer">
+    <hr
+      class="cds--hr"
+      style="margin:0;border:0;border-top:1px solid var(--cds-border-subtle,#393939)"
+    />
+    <div class="cds--grid">
+      <div class="cds--row">
+        <div class="cds--col-sm-4 cds--col-md-8 cds--col-lg-16">
+          <div>
+            <cds-link href="https://gov.uk/ofqual">
+              <img
+                src="{{ base_path }}themes/custom/carbonv1/assets/images/OfqualLogocolour.svg"
+                alt="Ofqual website"
+                id="footer-logo"
+                style="width:120px;height:auto;margin-top:1.5rem;min-width:80px;max-width:100%;"
+              />
+            </cds-link>
+          </div>
+          <nav aria-label="Footer links" style="margin-top:1rem;">
+            <ul
+              class="cds--list--inline"
+              style="flex-wrap:wrap;display:flex;gap:1rem;padding:0;margin:0;flex-direction:column;"
+            >
+              <li style="display:flex;gap:1rem;flex-wrap:wrap;">
+                <cds-link href="/cookies">Cookies</cds-link>
+                <cds-link href="https://www.gov.uk/government/organisations/ofqual/about/personal-information-charter">
+                  Privacy policy
+                </cds-link>
+                <cds-link href="https://www.gov.uk/government/publications/accessibility-statement-for-the-office-of-qualifications-and-examinations-regulation">
+                  Accessibility statement
+                </cds-link>
+              </li>
+              <li>
+                For technical support with this system please contact
+                <cds-link inline href="mailto:PortalSupport@ofqual.gov.uk">PortalSupport@ofqual.gov.uk</cds-link>
+              </li>
 
-                    <nav aria-label="Footer links" style="margin-top:1rem;">
-                        <ul class="cds--list--inline" style="flex-wrap:wrap;display:flex;gap:1rem;padding:0;margin:0;flex-direction:column;">
-                            <li style="display:flex;gap:1rem;flex-wrap:wrap;">
-                                <cds-link href="/cookies">Cookies</cds-link>
-                                <cds-link href="https://www.gov.uk/government/organisations/ofqual/about/personal-information-charter">Privacy policy</cds-link>
-                                <cds-link href="https://www.gov.uk/government/publications/accessibility-statement-for-the-office-of-qualifications-and-examinations-regulation">Accessibility statement</cds-link>
-                            </li>
-                            <li>
-                                For technical support with this system please contact
-                                <cds-link inline href="mailto:PortalSupport@ofqual.gov.uk">PortalSupport@ofqual.gov.uk</cds-link>
-                            </li>
-                            <li>
-                                &copy; {{ "now"|date("Y") }} Crown Copyright
-                            </li>
-                        </ul>
-                    </nav>
-                </div>
-            </div>
+              <li>
+                &copy; {{ "now"|date("Y") }} Crown Copyright
+              </li>
+            </ul>
+          </nav>
         </div>
-    </footer>
+      </div>
+    </div>
+  </footer>
 </cds-layer>
