@@ -1,26 +1,10 @@
-{#
-/**
-* @file
-* Theme override to display a single page.
-*
-* Requires theme JS to import the Carbon Web Components groups, e.g.:
-*   import '@carbon/web-components/es/components/accordion/index.js';
-*   import '@carbon/web-components/es/components/date-picker/index.js';
-*   import '@carbon/web-components/es/components/data-table/index.js';
-*   import '@carbon/web-components/es/components/pagination/index.js';
-*
-* And Sass to include @carbon/styles so tokens are available.
-*/
-#}
 <div class="page-wrapper">
-  {# Primary nav #}
   {% if page.primary_menu %}
     <nav class="primary-nav" role="navigation" aria-label="{{ 'Main navigation'|t }}">
       {{ page.primary_menu }}
     </nav>
   {% endif %}
 
-  {# Breadcrumb (if using core breadcrumb block/region) #}
   {% if breadcrumb is defined and breadcrumb %}
     <nav class="breadcrumb" aria-label="{{ 'Breadcrumb'|t }}">
       {{ breadcrumb }}
@@ -40,9 +24,7 @@
   <main role="main" class="site-main cds--content">
     <a id="main-content" tabindex="-1"></a>
 
-    <!-- Container: full-width Carbon CSS Grid -->
     <div class="cds--css-grid cds--css-grid--full-width">
-      <!-- LEFT column -->
       <div class="
         cds--css-grid-column
         cds--sm:col-span-4
@@ -51,12 +33,10 @@
         cds--xlg:col-span-4
         cds--max:col-span-4
       ">
-        <!-- Left rail content (e.g., filters, queues) -->
         {% if page.sidebar_first %}
           {{ page.sidebar_first }}
         {% endif %}
 
-        {# Date Picker #}
         <h4>Date Picker</h4>
         {% include 'carbonv1:cds-date-picker' with {
           label_text: '',
@@ -76,7 +56,6 @@
         </cds-accordion>
 
         <h4>Text Input</h4>
-        {# Text input #}
         {% include 'carbonv1:cds-text-input' with {
           name: 'case_title',
           label: 'Title',
@@ -94,7 +73,6 @@
           helper_text: 'Please enter the case Password.',
         } only %}
         <h4>Select</h4>
-        {# Select #}
         {% include 'carbonv1:cds-select' with {
           name: 'case_status',
           label: 'Status',
@@ -105,31 +83,26 @@
             { value: 'review',  label: 'Review' },
             { value: 'closed',  label: 'Closed' }
           ]
-        } only %}   
+        } only %}
         <h4>Textarea</h4>
-        {# Textarea #}
         {% include 'carbonv1:cds-textarea' with {
           name: 'case_notes',
           label: 'Notes',
           rows: 6,
           helper_text: 'Provide a detailed description of the case.'
-        } only %}    
+        } only %}
         <h4>Button</h4>
-        {# danger link button #}
         {% include 'carbonv1:cds-button' with {
           text: 'Cancel',
           kind: 'danger-tertiary',
           href: path('<front>')
-        } only %}         
-        {# Primary submit button #}
+        } only %}
         {% include 'carbonv1:cds-button' with {
           text: 'Save',
           kind: 'primary',
           type: 'submit'
-        } only %}           
+        } only %}
       </div>
-
-      <!-- RIGHT column -->
       <div class="
         cds--css-grid-column
         cds--sm:col-span-4
@@ -138,7 +111,6 @@
         cds--xlg:col-span-12
         cds--max:col-span-12
       ">
-        <!-- Main content -->
         {% if page.contents %}
           <div class="page-content">
             {{ page.content }}
@@ -189,8 +161,6 @@
     </div>
 
     {% include '@carbonv1/includes/footer.html.twig' %}
-
-    {# Sidebars #}
     {% if page.sidebar_first %}
       <aside class="layout-sidebar-first" role="complementary">
         {{ page.sidebar_first }}

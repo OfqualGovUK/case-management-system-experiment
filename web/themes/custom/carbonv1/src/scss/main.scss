@@ -1,26 +1,18 @@
-/* Carbon v11 theming */
 @use '@carbon/styles/scss/themes' as *;
 @use '@carbon/styles/scss/theme';
 @use '@carbon/styles';
 @use '@carbon/styles/scss/colors' as colors;
 :root {  @include theme.theme($white);   }
 
-/* Only affect the menu area */
-/* Make only the menu links/chevrons IBM blue */
 cds-header-nav,
 cds-header-menu,
 cds-header-nav-item,
 cds-header-menu-item {
-  /* covers builds that use currentColor on the inner <a> */
   color: #{colors.$blue-60};
- 
-  /* covers builds that read tokens from the host */
   --cds-text-primary: #{colors.$blue-60};
   --cds-link-primary: #{colors.$blue-60};
   --cds-link-primary-hover: #{colors.$blue-70};
   --cds-icon-primary: #{colors.$blue-60};
 }
- 
-/* Optional: highlight active item via component API (no CSS) */
-//cds-header-nav-item[active] { /* attribute is handled by the WC */ }
+
 

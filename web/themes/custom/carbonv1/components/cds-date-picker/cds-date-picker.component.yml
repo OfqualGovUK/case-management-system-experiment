@@ -2,7 +2,6 @@ name: 'Carbon Date Picker'
 description: 'Wrapper for <cds-date-picker> (Carbon web components).'
 status: stable
 
-#Ensures global theme library (that import carbon) is loaded
 libraryOverrides:
   dependencies:
    - carbonv1/global

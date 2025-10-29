@@ -4,6 +4,7 @@ base theme: starterkit_theme
 description: A flexible theme with a responsive, mobile-first layout.
 package: custom
 core_version_requirement: ^10 || ^11
+sdc: true
 libraries:
   - carbonv1/global
   - templates/includes

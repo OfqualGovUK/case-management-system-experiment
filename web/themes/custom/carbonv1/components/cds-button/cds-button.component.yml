@@ -1,26 +1,25 @@
 name: Carbon Button
 description: IBM Carbon <cds-button> wrapper
 status: stable
- 
+
 props:
   type: object
   properties:
     id:            { type: string }
-    text:          { type: string, default: 'Text' }   
-    kind:          { type: string, default: primary, enum: [primary, secondary, tertiary, ghost, danger] }
+    text:          { type: string, default: 'Text' }
+    kind:          { type: string, default: primary, enum: [primary, secondary, tertiary, ghost, danger, danger-tertiary] }
     size:          { type: string, default: md, enum: [sm, md, lg] }
     disabled:      { type: boolean, default: false }
- 
-    # If set, the button renders as a link (<a>).
+
     href:          { type: string, default: '' }
     target:        { type: string, default: '' }
     download:      { type: string, default: '' }
- 
-    # For real <button> behavior (ignored when href is present)
+
     type:          { type: string, default: button, enum: [button, submit, reset] }
- 
-    # Icon handling (optional)
-    icon_svg:      { type: string, default: '' }     # raw <svg> markup; will be slotted
-    icon_only:     { type: boolean, default: false } # render icon-only button
-    icon_description: { type: string, default: '' }  # required if icon_only = true (for a11y)
-  required: []
+
+    icon_svg:      { type: string, default: '' }
+    icon_only:     { type: boolean, default: false }
+    icon_description: { type: string, default: '' }
+  required:
+    - text
+    - kind
