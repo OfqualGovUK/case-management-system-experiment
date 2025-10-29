@@ -13,8 +13,3 @@
   {% if invalid %} invalid {% endif %}
   {% if invalid_text %} invalid-text="{{ invalid_text }}" {% endif %}
 ></cds-textarea>
- 
-{# Optional: hidden input if need Drupal to receive a value on submit #}
-{% if name is defined %}
-<input type="hidden" name="{{ name }}" value="{{ value|default('') }}" data-sync-from="{{ _id }}">
-{% endif %}

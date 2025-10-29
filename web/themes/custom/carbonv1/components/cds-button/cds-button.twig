@@ -27,7 +27,7 @@
     {% if icon_svg %}
         <span slot="icon">{{ icon_svg|raw }}</span>
     {% endif %}
-    {# Visible label (skip when icon-only) #}
+    {# Visible label(skip when icon-only) #}
     {% if not _icon_only %}
         {{- _label -}}
     {% endif %}
