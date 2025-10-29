@@ -1,7 +1,7 @@
 name: Carbon Structured List
 description: IBM Carbon structured list (Web Component) — read-only variant
 status: stable
- 
+
 props:
   type: object
   properties:
@@ -9,13 +9,10 @@ props:
     caption:   { type: string, default: '' }
     condensed: { type: boolean, default: false }
     selectable: { type: boolean, default: false }
- 
     headers:
       type: array
       items: { type: string }
       default: []
- 
-    # rows: array of { cells: [...] }
     rows:
       type: array
       default: []
