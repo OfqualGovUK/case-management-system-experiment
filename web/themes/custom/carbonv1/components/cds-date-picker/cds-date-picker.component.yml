@@ -25,4 +25,3 @@ props:
     value:
       type: string
       nullable: false
-  required: [label_text]
