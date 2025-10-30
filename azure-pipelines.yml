@@ -1,0 +1,92 @@
+
+# Build and push an image to Azure Container Registry
+# https://docs.microsoft.com/azure/devops/pipelines/languages/docker
+
+trigger:
+ branches:
+   include:
+     - main
+     - releases/*
+
+pool:
+ vmImage: 'ubuntu-latest'
+
+variables:
+ dockerfilePath: '$(System.DefaultWorkingDirectory)/Dockerfile'
+ tag: '$(Build.BuildId)'
+
+stages:
+  - stage: StaticAnalysis
+    displayName: Static Analysis and Security Scans
+    condition: always()
+    jobs:
+      - job: Snyk
+        displayName: Snyk Security Scans
+        steps:
+        - script: |
+            npm install -g snyk
+            snyk config set endpoint=$(SNYK_ENDPOINT)
+            snyk auth $(SNYK_TOKEN)
+            set +e
+        - task: SnykSecurityScan@1
+          inputs:
+            serviceConnectionEndpoint: 'snyk-integration-eu'
+            testType: 'code'
+            codeSeverityThreshold: 'high'
+            failOnIssues: false
+        - task: SnykSecurityScan@1
+          inputs:
+            serviceConnectionEndpoint: 'snyk-integration-eu'
+            testType: 'app'
+            monitorWhen: 'always'
+            severityThreshold: 'high'
+            failOnIssues: false
+            additionalArguments: '--all-projects'
+        - task: Docker@2
+          inputs:
+            command: build
+            repository: $(SNYK_DOCKER_REPOS)
+            dockerfile: '$(dockerfilePath)'
+            tags: 'latest'
+        - task: SnykSecurityScan@1
+          inputs:
+            serviceConnectionEndpoint: 'snyk-integration-eu'
+            testType: 'container'
+            dockerImageName: '$(SNYK_DOCKER_REPOS):latest'
+            dockerfilePath: './Dockerfile'
+            monitorWhen: 'always'
+            severityThreshold: 'high'
+            failOnIssues: false
+
+  - stage: Build
+    displayName: Build and Push Docker Image
+    condition: succeeded()
+    dependsOn: StaticAnalysis
+    jobs:
+      - job: BuildDev
+        displayName: Build and Push to Dev ACR
+        condition: and(succeeded(), not(startsWith(variables['build.sourceBranch'], 'refs/pull')))
+        steps:
+        - task: Docker@2
+          inputs:
+            command: buildAndPush
+            repository: $(imageRepository)
+            containerRegistry: $(dockerRegistryServiceConnectionDev)
+            dockerfile: $(dockerfilePath)
+            tags: |
+              latest
+              $(tag)
+
+      - job: BuildProd
+        displayName: Build and Push to Prod ACR
+        condition: and(succeeded(), startsWith(variables['build.sourceBranch'], 'refs/heads/releases'))
+        steps:
+        - task: Docker@2
+          inputs:
+            command: buildAndPush
+            repository: $(imageRepository)
+            containerRegistry: $(dockerRegistryServiceConnectionProd)
+            dockerfile: $(dockerfilePath)
+            tags: |
+              latest
+              $(tag)
