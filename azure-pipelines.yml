@@ -37,6 +37,7 @@ stages:
             snyk config set endpoint=$(SNYK_ENDPOINT)
             snyk auth $(SNYK_TOKEN)
             set +e
+          displayName: Install and Authenticate Snyk CLI
         - task: SnykSecurityScan@1
           displayName: 'Snyk scanning code'
           inputs:
@@ -53,6 +54,7 @@ stages:
             severityThreshold: 'high'
             failOnIssues: false
         - task: SnykSecurityScan@1
+          displayName: 'Snyk scanning container'
           inputs:
             serviceConnectionEndpoint: 'snyk-integration-eu'
             testType: 'container'
