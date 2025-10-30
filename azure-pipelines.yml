@@ -23,32 +23,40 @@ stages:
       - job: Snyk
         displayName: Snyk Security Scans
         steps:
+        - task: Docker@2
+          displayName: Build Docker Image
+          inputs:
+            command: build
+            repository: $(SNYK_DOCKER_REPOS)
+            dockerfile: '$(dockerfilePath)'
+            containerRegistry: $(dockerRegistryServiceConnectionDev)
+            tags: 'latest'
+        - script: docker images
+          displayName: List Docker Images
         - script: |
             npm install -g snyk
             snyk config set endpoint=$(SNYK_ENDPOINT)
             snyk auth $(SNYK_TOKEN)
             set +e
+          displayName: Install and Authenticate Snyk CLI
         - task: SnykSecurityScan@1
+          displayName: 'Snyk scanning code'
           inputs:
             serviceConnectionEndpoint: 'snyk-integration-eu'
             testType: 'code'
             codeSeverityThreshold: 'high'
             failOnIssues: false
         - task: SnykSecurityScan@1
+          displayName: 'Snyk scanning app'
           inputs:
             serviceConnectionEndpoint: 'snyk-integration-eu'
             testType: 'app'
             monitorWhen: 'always'
             severityThreshold: 'high'
             failOnIssues: false
-            additionalArguments: '--all-projects'
-        - task: Docker@2
-          inputs:
-            command: build
-            repository: $(SNYK_DOCKER_REPOS)
-            dockerfile: '$(dockerfilePath)'
-            tags: 'latest'
+            additionalArguments: '--file=composer.lock'
         - task: SnykSecurityScan@1
+          displayName: 'Snyk scanning container'
           inputs:
             serviceConnectionEndpoint: 'snyk-integration-eu'
             testType: 'container'

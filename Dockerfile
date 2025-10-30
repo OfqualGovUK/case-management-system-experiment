@@ -1,4 +1,4 @@
-FROM public.ecr.aws/bitnami/drupal:11.2.5
+FROM crofqappdev1.azurecr.io/ofqual/drupal-bitnami:latest
 
 COPY composer.json composer.lock /app/
 COPY web/themes/custom /app/web/themes/custom
