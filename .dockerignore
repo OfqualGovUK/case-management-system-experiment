@@ -1,0 +1,38 @@
+# OS / editor files
+.DS_Store
+Thumbs.db
+*.swp
+*.swo
+*.tmp
+
+# Git and version control
+.git
+.gitignore
+.gitattributes
+
+# Node / front-end build artefacts
+node_modules/
+npm-debug.log
+yarn.lock
+
+# Composer vendor directory
+vendor/
+
+# Drupal local files
+web/sites/*/files/
+web/sites/*/private/
+
+# Logs
+logs/
+*.log
+
+# Temp storage
+tmp/
+.cache/
+
+# Azure DevOps pipeline files
+azure-pipelines.yml
+
+# Docker files not needed inside the image
+docker-compose.yml
+.dockerignore
