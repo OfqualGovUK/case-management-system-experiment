@@ -52,7 +52,6 @@ stages:
             monitorWhen: 'always'
             severityThreshold: 'high'
             failOnIssues: false
-            additionalArguments: '--all-projects'
         - task: SnykSecurityScan@1
           inputs:
             serviceConnectionEndpoint: 'snyk-integration-eu'
