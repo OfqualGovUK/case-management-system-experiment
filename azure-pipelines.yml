@@ -53,7 +53,7 @@ stages:
             monitorWhen: 'always'
             severityThreshold: 'high'
             failOnIssues: false
-            additionalArguments: '--file=web/composer.json'
+            additionalArguments: '--file=./composer.json'
         - task: SnykSecurityScan@1
           displayName: 'Snyk scanning container'
           inputs:
