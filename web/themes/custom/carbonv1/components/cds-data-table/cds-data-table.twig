@@ -1,7 +1,6 @@
 <section class="cds-data-table" data-cds-datatable data-page-size="{{ page_size|default(10) }}">
   <cds-table
     {% if sortable %} is-sortable {% endif %}
-    id="{{ _id }}"
     size="{{ size|default('lg') }}"
   >
     {% if searchable %}
