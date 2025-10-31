@@ -24,3 +24,6 @@ props:
     paginated: { type: boolean, default: true }
     page_size:  { type: integer, default: 10 }
     page_sizes: { type: array,  items: { type: integer }, default: [10,20,50] }
+  required: 
+    - headers
+    - rows

@@ -1,9 +1,0 @@
-# Main theme library.
-global:
-  css:
-    theme:
-      build/css/style.css: {}
-  js:
-    dist/ofqual-carbon.js: {}
-  dependencies:
-    - core/drupal

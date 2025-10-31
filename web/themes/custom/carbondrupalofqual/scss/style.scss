@@ -1,9 +1,0 @@
-@use '@carbon/styles' with (
-  $theme: (
-    theme: 'g10', // g10 = light, g90 = dark, g100 = darker
-  )
-);
-
-body {
-  font-family: 'IBM Plex Sans', sans-serif;
-}

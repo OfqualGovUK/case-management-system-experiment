@@ -2,13 +2,12 @@ name: 'Carbon Date Picker'
 description: 'Wrapper for <cds-date-picker> (Carbon web components).'
 status: stable
 
-#Ensures global theme library (that import carbon) is loaded
 libraryOverrides:
   dependencies:
    - carbonv1/global
 
 props:
-  tyle: object
+  type: object
   properties:
     label_text:
       type: string
@@ -25,5 +24,4 @@ props:
       default: 'Y-m-d'
     value:
       type: string
-      nullable: true
-  required: [label_text]
+      nullable: false
