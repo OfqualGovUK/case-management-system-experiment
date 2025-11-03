@@ -25,6 +25,7 @@
         "drupal/externalauth": "^2",
         "drupal/key": "^1.20",
         "drupal/openid_connect": "^3.0@alpha",
+        "drupal/simple_oauth": "^6.0.7",
         "drupal/ui_patterns": "^2.0",
         "drush/drush": "^13.6"
     },
