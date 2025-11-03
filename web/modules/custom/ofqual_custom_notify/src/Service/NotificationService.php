@@ -4,6 +4,7 @@ namespace Drupal\ofqual_custom_notify\Service;
 
 use GuzzleHttp\ClientInterface;
 use Drupal\Core\Logger\LoggerChannelFactoryInterface;
+use Drupal\Core\Logger\LoggerChannelInterface;
 use Drupal\key\KeyRepository;
 use Drupal\Component\Serialization\Json;
 
@@ -24,7 +25,7 @@ class NotificationService {
    *
    * @var \Drupal\Core\Logger\LoggerChannelInterface
    */
-  protected $logger;
+  protected LoggerChannelInterface $logger;
 
   /**
    * The key repository.
@@ -63,7 +64,7 @@ class NotificationService {
       $apiKeyValue = $this->keyRepository->getKey('ofqual_api_credentials')->getKeyValue();
       if (!$apiKeyValue) {
         $this->logger->error('Key "ofqual_api_credentials" not found.');
-        return false;
+        return FALSE;
       }
 
       $apiCredentials = Json::decode($apiKeyValue);
@@ -78,24 +79,24 @@ class NotificationService {
 
       foreach ($requiredCredentialKeys as $credentialKey) {
         if (empty($apiCredentials[$credentialKey])) {
-          $this->logger->error("Missing required credential: {$credentialKey}");
-          return false;
+          $this->logger->error('Missing required credential: @key', ['@key' => $credentialKey]);
+          return FALSE;
         }
       }
 
       $accessTokenResponse = $this->httpClient->post($apiCredentials['token_endpoint'], [
         'form_params' => [
-          'client_id' => $apiCredentials['client_id'],
+          'client_id'     => $apiCredentials['client_id'],
           'client_secret' => $apiCredentials['client_secret'],
-          'grant_type' => $apiCredentials['grant_type'],
-          'scope' => $apiCredentials['scope'],
+          'grant_type'    => $apiCredentials['grant_type'],
+          'scope'         => $apiCredentials['scope'],
         ],
       ]);
 
       $accessTokenData = Json::decode($accessTokenResponse->getBody()->getContents());
       if (empty($accessTokenData['access_token'])) {
         $this->logger->error('Failed to retrieve access token.');
-        return false;
+        return FALSE;
       }
 
       $notificationResponse = $this->httpClient->post($apiCredentials['notificationapi'], [
@@ -103,8 +104,8 @@ class NotificationService {
         'timeout' => 10,
         'headers' => [
           'Authorization' => 'Bearer ' . $accessTokenData['access_token'],
-          'Accept' => 'application/json',
-          'Content-Type' => 'application/json',
+          'Accept'        => 'application/json',
+          'Content-Type'  => 'application/json',
         ],
       ]);
 
@@ -113,7 +114,7 @@ class NotificationService {
     }
     catch (\Exception $exception) {
       $this->logger->error('Notification sending failed: @message', ['@message' => $exception->getMessage()]);
-      return false;
+      return FALSE;
     }
   }
 

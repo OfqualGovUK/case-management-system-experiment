@@ -15,29 +15,29 @@ function ofqual_custom_notify_user_login(UserInterface $account) {
   \Drupal::messenger()->addMessage(t('Welcome back, @username!', ['@username' => $account->getAccountName()]));
   \Drupal::logger('ofqual_custom_notify')->notice('User @username has logged in.', ['@username' => $account->getAccountName()]);
 
-  $key = Key::load('ofqual_api_credentials');
-  if (!$key) {
+  $apiKeyEntity = Key::load('ofqual_api_credentials');
+  if (!$apiKeyEntity) {
     \Drupal::logger('ofqual_custom_notify')->error('Key "ofqual_api_credentials" not found.');
     return;
   }
 
-  $credentials = json_decode($key->getKeyValue(), TRUE);
-  $required_keys = ['source_id', 'source_upn', 'target_upn'];
-  foreach ($required_keys as $required_key) {
-    if (empty($credentials[$required_key])) {
-      \Drupal::logger('ofqual_custom_notify')->error("Missing required payload configuration: {$required_key}");
+  $apiCredentials = json_decode($apiKeyEntity->getKeyValue(), true);
+  $requiredCredentialKeys = ['source_id', 'source_upn', 'target_upn'];
+  foreach ($requiredCredentialKeys as $credentialKey) {
+    if (empty($apiCredentials[$credentialKey])) {
+      \Drupal::logger('ofqual_custom_notify')->error('Missing required payload configuration: @key', ['@key' => $credentialKey]);
       return;
     }
   }
 
-  $notification_service = \Drupal::service('ofqual_custom_notify.notification_service');
-  $payload = [
-    'SourceId' => $credentials['source_id'],
-    'SourceModule' => 1,
-    'SourceUpn' => $credentials['source_upn'],
-    'Summary' => 'Hi, New user logged in using SSO',
-    'TargetUpn' => $credentials['target_upn'],
+  $notificationService = \Drupal::service('ofqual_custom_notify.notification_service');
+  $notificationPayload = [
+    'SourceId'      => $apiCredentials['source_id'],
+    'SourceModule'  => 1,
+    'SourceUpn'     => $apiCredentials['source_upn'],
+    'Summary'       => 'Hi, New user logged in using SSO',
+    'TargetUpn'     => $apiCredentials['target_upn'],
   ];
 
-  $notification_service->send($payload);
+  $notificationService->send($notificationPayload);
 }
