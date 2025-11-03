@@ -22,6 +22,10 @@
         "drupal/core-project-message": "^11.2",
         "drupal/core-recipe-unpack": "^11.2",
         "drupal/core-recommended": "^11.2",
+        "drupal/externalauth": "^2",
+        "drupal/key": "^1.20",
+        "drupal/openid_connect": "^3.0@alpha",
+        "drupal/ui_patterns": "^2.0",
         "drush/drush": "^13.6"
     },
     "conflict": {
