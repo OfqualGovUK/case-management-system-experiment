@@ -11,7 +11,8 @@ use Drupal\Component\Serialization\Json;
 /**
  * Provides a service to send notifications via external API.
  */
-class NotificationService {
+class NotificationService
+{
 
   /**
    * The HTTP client.
@@ -44,7 +45,11 @@ class NotificationService {
    * @param \Drupal\key\KeyRepository $keyRepository
    *   The key repository.
    */
-  public function __construct(ClientInterface $httpClient, LoggerChannelFactoryInterface $loggerFactory, KeyRepository $keyRepository) {
+  public function __construct(
+    ClientInterface $httpClient,
+    LoggerChannelFactoryInterface $loggerFactory,
+    KeyRepository $keyRepository
+  ) {
     $this->httpClient = $httpClient;
     $this->logger = $loggerFactory->get('ofqual_custom_notify');
     $this->keyRepository = $keyRepository;
@@ -59,7 +64,8 @@ class NotificationService {
    * @return bool
    *   TRUE if the notification was sent successfully, FALSE otherwise.
    */
-  public function send(array $notificationPayload): bool {
+  public function send(array $notificationPayload): bool
+  {
     try {
       $apiKeyValue = $this->keyRepository->getKey('ofqual_api_credentials')->getKeyValue();
       if (!$apiKeyValue) {
@@ -111,11 +117,9 @@ class NotificationService {
 
       $this->logger->notice('Token response received.');
       return $notificationResponse->getStatusCode() === 200;
-    }
-    catch (\Exception $exception) {
+    } catch (\Exception $exception) {
       $this->logger->error('Notification sending failed: @message', ['@message' => $exception->getMessage()]);
       return FALSE;
     }
   }
-
 }
