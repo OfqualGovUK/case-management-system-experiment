@@ -8,6 +8,12 @@
       <cds-header-menu-item href="javascript:void 0">Subject matter specialists</cds-header-menu-item>
       <cds-header-menu-item href="javascript:void 0">Prospective organisations</cds-header-menu-item>
     </cds-header-menu>
+    {% if logged_in %}
+      <cds-header-nav-item href="{{ path('user.logout') }}">Logout</cds-header-nav-item>
+      <cds-header-nav-item href="{{ path('user.page') }}">My Account</cds-header-nav-item>
+    {% else %}
+      <cds-header-nav-item href="{{ path('user.login') }}">Login</cds-header-nav-item>
+    {% endif %}
   </cds-header-nav>
   <cds-side-nav is-not-persistent="" aria-label="Side navigation" collapse-mode="responsive">
     <cds-side-nav-items>

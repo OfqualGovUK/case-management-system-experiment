@@ -23,3 +23,6 @@ node_modules/
 
 # Ignore Docker files
 docker-compose.yml
+
+# Ignore Keys
+keys/

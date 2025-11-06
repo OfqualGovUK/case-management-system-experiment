@@ -1,0 +1,43 @@
+<?php
+
+use Drupal\user\UserInterface;
+use Drupal\key\Entity\Key;
+
+/**
+ * Implements hook_user_login().
+ *
+ * Sends a notification when a user logs in.
+ *
+ * @param \Drupal\user\UserInterface $account
+ *   The user account that logged in.
+ */
+function ofqual_custom_notify_user_login(UserInterface $account) {
+  \Drupal::messenger()->addMessage(t('Welcome back, @username!', ['@username' => $account->getAccountName()]));
+  \Drupal::logger('ofqual_custom_notify')->notice('User @username has logged in.', ['@username' => $account->getAccountName()]);
+
+  $apiKeyEntity = Key::load('ofqual_api_credentials');
+  if (!$apiKeyEntity) {
+    \Drupal::logger('ofqual_custom_notify')->error('Key "ofqual_api_credentials" not found.');
+    return;
+  }
+
+  $apiCredentials = json_decode($apiKeyEntity->getKeyValue(), true);
+  $requiredCredentialKeys = ['source_id', 'source_upn', 'target_upn'];
+  foreach ($requiredCredentialKeys as $credentialKey) {
+    if (empty($apiCredentials[$credentialKey])) {
+      \Drupal::logger('ofqual_custom_notify')->error('Missing required payload configuration: @key', ['@key' => $credentialKey]);
+      return;
+    }
+  }
+
+  $notificationService = \Drupal::service('ofqual_custom_notify.notification_service');
+  $notificationPayload = [
+    'SourceId'      => $apiCredentials['source_id'],
+    'SourceModule'  => 1,
+    'SourceUpn'     => $apiCredentials['source_upn'],
+    'Summary'       => 'Hi, New user logged in using SSO',
+    'TargetUpn'     => $apiCredentials['target_upn'],
+  ];
+
+  $notificationService->send($notificationPayload);
+}
