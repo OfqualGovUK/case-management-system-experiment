@@ -1,0 +1,7 @@
+name: OpenID Role Mapping
+type: module
+description: Apply Drupal role mappings based on OpenID Connect claims.
+core_version_requirement: ^11
+package: Custom
+dependencies:
+  - openid_connect:openid_connect
