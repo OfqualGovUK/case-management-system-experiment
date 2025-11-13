@@ -16,7 +16,6 @@ module:
   config: 0
   contact: 0
   contextual: 0
-  custom_oidc_debug: 0
   datetime: 0
   dblog: 0
   dynamic_page_cache: 0
@@ -54,7 +53,6 @@ module:
   taxonomy: 0
   text: 0
   toolbar: 0
-  typed_data: 0
   ui_patterns: 0
   ui_patterns_blocks: 0
   ui_patterns_field: 0

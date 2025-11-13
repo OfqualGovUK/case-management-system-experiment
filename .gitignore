@@ -5,7 +5,6 @@
 /web/themes/contrib/
 /web/profiles/contrib/
 /web/sites/*/files/
-/web/sites/*/settings*.php
  
 # Ignore DDEV & local env
 .ddev/

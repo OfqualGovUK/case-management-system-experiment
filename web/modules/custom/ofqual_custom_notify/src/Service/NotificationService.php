@@ -67,27 +67,24 @@ class NotificationService
   public function send(array $notificationPayload): bool
   {
     try {
-      $apiKeyValue = $this->keyRepository->getKey('ofqual_api_credentials')->getKeyValue();
-      if (!$apiKeyValue) {
-        $this->logger->error('Key "ofqual_api_credentials" not found.');
-        return FALSE;
-      }
-
-      $apiCredentials = Json::decode($apiKeyValue);
-      $requiredCredentialKeys = [
-        'client_id',
-        'client_secret',
-        'grant_type',
-        'scope',
-        'token_endpoint',
-        'notificationapi',
+      $requiredKeys = [
+        'client_id' => 'client_id',
+        'client_secret' => 'client_secret',
+        'grant_type' => 'grant_type',
+        'scope' => 'scope',
+        'token_endpoint' => 'token_endpoint',
+        'notification_api' => 'notification_api',
       ];
 
-      foreach ($requiredCredentialKeys as $credentialKey) {
-        if (empty($apiCredentials[$credentialKey])) {
-          $this->logger->error('Missing required credential: @key', ['@key' => $credentialKey]);
+      $apiCredentials = [];
+
+      foreach ($requiredKeys as $property => $keyId) {
+        $keyValue = $this->keyRepository->getKey($keyId)->getKeyValue();
+        if (empty($keyValue)) {
+          $this->logger->error('Missing key: @key', ['@key' => $keyId]);
           return FALSE;
         }
+        $apiCredentials[$property] = $keyValue;
       }
 
       $accessTokenResponse = $this->httpClient->post($apiCredentials['token_endpoint'], [
@@ -105,7 +102,7 @@ class NotificationService
         return FALSE;
       }
 
-      $notificationResponse = $this->httpClient->post($apiCredentials['notificationapi'], [
+      $notificationResponse = $this->httpClient->post($apiCredentials['notification_api'], [
         'json' => $notificationPayload,
         'timeout' => 10,
         'headers' => [
@@ -115,7 +112,7 @@ class NotificationService
         ],
       ]);
 
-      $this->logger->notice('Token response received.');
+      $this->logger->notice('Notification sent successfully.');
       return $notificationResponse->getStatusCode() === 200;
     } catch (\Exception $exception) {
       $this->logger->error('Notification sending failed: @message', ['@message' => $exception->getMessage()]);

@@ -53,62 +53,27 @@
     "preferred-install": "dist"
   },
   "extra": {
-    "drupal-scaffold": {
-      "locations": {
-        "web-root": "web/"
-      }
-    },
     "installer-paths": {
-      "web/core": [
+      "core": [
         "type:drupal-core"
       ],
-      "web/libraries/{$name}": [
+      "libraries/{$name}": [
         "type:drupal-library"
       ],
-      "web/modules/contrib/{$name}": [
+      "modules/contrib/{$name}": [
         "type:drupal-module"
       ],
-      "web/profiles/contrib/{$name}": [
-        "type:drupal-profile"
-      ],
-      "web/themes/contrib/{$name}": [
+      "themes/contrib/{$name}": [
         "type:drupal-theme"
       ],
-      "drush/Commands/contrib/{$name}": [
-        "type:drupal-drush"
+      "profiles/contrib/{$name}": [
+        "type:drupal-profile"
       ],
-      "web/modules/custom/{$name}": [
+      "modules/custom/{$name}": [
         "type:drupal-custom-module"
       ],
-      "web/profiles/custom/{$name}": [
-        "type:drupal-custom-profile"
-      ],
-      "web/themes/custom/{$name}": [
+      "themes/custom/{$name}": [
         "type:drupal-custom-theme"
-      ],
-      "recipes/{$name}": [
-        "type:drupal-recipe"
-      ]
-    },
-    "drupal-core-project-message": {
-      "include-keys": [
-        "homepage",
-        "support"
-      ],
-      "post-create-project-cmd-message": [
-        "<bg=blue;fg=white>                                                         </>",
-        "<bg=blue;fg=white>  Congratulations, you’ve installed the Drupal codebase  </>",
-        "<bg=blue;fg=white>  from the drupal/recommended-project template!          </>",
-        "<bg=blue;fg=white>                                                         </>",
-        "",
-        "<bg=yellow;fg=black>Next steps</>:",
-        "  * Install the site: https://www.drupal.org/docs/installing-drupal",
-        "  * Read the user guide: https://www.drupal.org/docs/user_guide/en/index.html",
-        "  * Get support: https://www.drupal.org/support",
-        "  * Get involved with the Drupal community:",
-        "      https://www.drupal.org/getting-involved",
-        "  * Remove the plugin that prints this message:",
-        "      composer remove drupal/core-project-message"
       ]
     }
   },
