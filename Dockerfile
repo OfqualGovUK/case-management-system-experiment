@@ -1,10 +1,14 @@
 FROM crofqappdev1.azurecr.io/ofqual/drupal-bitnami:latest
 
-COPY composer.json composer.lock /app/
-COPY web/themes/custom /app/web/themes/custom
-
 USER root
-RUN mkdir -p /app/vendor && chown -R 1001:0 /app
-USER 1001
 
-RUN cd /app && composer install --no-dev --no-interaction
+COPY composer.json composer.lock /opt/bitnami/drupal/
+RUN cd /opt/bitnami/drupal && composer install --no-dev --no-interaction
+
+COPY config /opt/bitnami/drupal/sites/default/files/config/
+COPY web/sites/default/settings.php /opt/bitnami/drupal/sites/default/settings.php
+COPY web/modules/custom /opt/bitnami/drupal/modules/custom/
+COPY web/themes/custom /opt/bitnami/drupal/themes/custom/
+
+RUN chown -R 1001:0 /opt/bitnami/drupal
+USER 1001
